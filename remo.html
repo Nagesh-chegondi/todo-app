@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       
+       
+       /* General Body and Container Styling */
+body {
+    background-color: #2c3e50;   /* A darker, more modern background
+    color: #ecf0f1; /* Light text for contrast */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A clean, modern font */
+    margin: 0;
+    padding: 0;
+}
+/* .tom{
+    display: flex;
+    width: 100%;
+    
+} */
+ .tom {
+    display: flex;
+    width: 100%;
+    align-items: flex-start; /* or flex-end, or center */
+    gap: 10px;
+}
+.team{
+    width:80%;
+    background-color: rgb(89, 85, 85);
+    padding: 5px;
+    border: 2px black;
+    border-radius: 7px;
+    min-height: 30px;
+    
+}
+
+.navi {
+    background-color: #34495e;
+    min-height: 60px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;  /*Allows sections to wrap on smaller screens*/
+    padding: 20px;
+    gap: 20px; /* Adds space between the columns */
+    min-height: calc(100vh - 60px); /* Fills the remaining viewport height */
+}
+
+/* To-Do List and Input Area Styling */
+.tada {
+    /* flex: 1; Allows this section to grow and take up available space */
+    background: #34495e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* align-items: center; */
+}
+.trim{
+    background-color: #465f7c;
+}
+
+.boxes {
+    /* flex-basis: 350px; A fixed width for the input box, but it can shrink */
+    background-color: #34495e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    height: auto; /* Allow the height to adjust to content */
+    width: 21%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #7f8c8d;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    font-size: 1em;
+}
+
+/* Button Styling */
+button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    /* background-color: #2980b9; */
+}
+button>img{
+    /* opacity: 0; */
+    background-color: none;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Logout Button Specifics */
+.logout-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #e74c3c;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
+
+/* To-Do Item Styling */
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #465f7c;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #ecf0f1;
+}
+
+.todo-item > nav {
+    background: none;
+    display: block;
+    padding: 0;
+    margin: 0;
+    
+    flex-grow: 1;
+    font-size: 1.1em;
+}
+
+/* Complete Button Styling within a To-Do Item */
+.todo-item button> {
+    background: #2ecc71;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    color: white;
+}
+
+
+
+.completed-btn {
+    background-color: #e74c3c !important;
+    padding: 9px !important;
+    border-radius: 7px !important;
+}
+    </style>
+</head>
+<body>
+    <div>
+        <div class="navi">
+            <nav><button onclick="logout()">logout</button></nav>
+         </div>
+        
+    </div>
+
+        </div>
+        <div class=" container">
+            <div class="tada">
+                
+        </div>
+            <div class="boxes">
+                <div><form action=" todo">
+                    <label for="ADDTODO">ADDTODO:</label>
+                    <input type="text" id="ADDTODO" placeholder="enter a TODO">
+                  
+                    
+                </form>
+              <button onclick="addtodo()">SUBMIT</button></div>
+            </div>
+
+        
+    
+</body>
+<script>
+    async function addtodo(){
+        
+        // window.location.href = 'index.html';
+        let todo = document.getElementById('ADDTODO').value
+        let addtodo =  await fetch('http://localhost:5000/adtodo',{
+            method: 'POST',
+            headers:{
+                
+    'Content-Type': 'application/json',
+     token: localStorage.getItem("token")  
+},
+
+            body: JSON.stringify({
+                todo:todo
+                
+            })
+        })
+         let newdev = document.createElement('div')  
+         newdev.innerHTML += `<div class = " tom"><div class = "team">${todo} </div>
+        <div> <button onclick="complete(this)">completed</button></div>
+         </div>
+         <div><button class ="trim" onclick="deletei(this)"><img src="../delete.svg" alt="delete"></button></div>`;
+         newdev.className = "todo-item";
+         document.getElementsByClassName('tada')[0].appendChild(newdev);
+
+
+    }
+    function logout(){
+        localStorage.removeItem("token");
+        window.location.href = "index.html"
+    }
+    function complete(element){
+        element.innerHTML = "COMPLETED";
+        element.style.backgroundColor = 'red';
+        element.style.padding = "9px";
+        element.style.borderRadius = "7px"
+    }
+     async function getinformation(){
+        let response = await fetch('http://localhost:5000/me',{
+            method: 'GET',
+            headers: {
+                token: localStorage.getItem("token")
+            },
+            
+
+            
+            
+
+
+        });
+        const data = await( response.json());
+        // console.log(data.email);
+        // console.log(data.password);
+        console.log(data.todos);
+        for(let i=0;i<data.todos.length;i++){
+        let newdev = document.createElement('div')  
+         newdev.innerHTML += `<div class = " tom"><div class = "team">${data.todos[i].titles} </div>
+        <div> <button onclick="complete(this)">completed</button></div>
+         </div>
+         <div><button  class = "trim" onclick="deletei(this)"><img src="../delete.svg" alt="delete"></button></div>`;
+         newdev.className = "todo-item";
+         document.getElementsByClassName('tada')[0].appendChild(newdev);
+        }
+
+        // console.log(response.todo);
+    }; 
+    async function deletei(element){
+        let todo = element.closest('.todo-item').querySelector('.team').innerText;
+        // let todo =element.closest('.team').innerText;
+        
+        console.log(todo);
+                let response = await fetch('http://localhost:5000/delete',{
+                    method: 'DELETE',
+                    headers: {
+                        token: localStorage.getItem("token"),
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        todo: todo
+                    })
+                });
+                element.closest('.todo-item').remove();
+    }
+        getinformation();
+
+</script>
+</html>
