@@ -143,30 +143,31 @@
         }
     }
     
-    async function getinformation(){
-        let response = await fetch('http://localhost:5000/me',{
-            method: 'GET',
-            headers: {
-                token: localStorage.getItem("token")
-            },
+    // async function getinformation(){
+    //     let response = await fetch('http://localhost:5000/me',{
+    //         method: 'GET',
+    //         headers: {
+    //             token: localStorage.getItem("token")
+    //         },
             
 
             
             
 
 
-        });
-        console.log(response.email);
-        console.log(response.password);
-    };
+    //     });
+    //     console.log(response.email);
+    //     console.log(response.password);
+    // };
     // function signin(){
     //     window.location.href = "remo.html";
     // }
    
        
      
-    getinformation();
+    
    
 
 </script>
+
 </html>
