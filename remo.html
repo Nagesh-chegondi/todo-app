@@ -212,7 +212,7 @@ button:hover {
         
         // window.location.href = 'index.html';
         let todo = document.getElementById('ADDTODO').value
-        let addtodo =  await fetch('http://localhost:5000/adtodo',{
+        let addtodo =  await fetch('https://render-backend-project-950s.onrender.com/adtodo',{
             method: 'POST',
             headers:{
                 
@@ -246,7 +246,7 @@ button:hover {
         element.style.borderRadius = "7px"
     }
      async function getinformation(){
-        let response = await fetch('http://localhost:5000/me',{
+        let response = await fetch('https://render-backend-project-950s.onrender.com/me',{
             method: 'GET',
             headers: {
                 token: localStorage.getItem("token")
@@ -279,7 +279,7 @@ button:hover {
         // let todo =element.closest('.team').innerText;
         
         console.log(todo);
-                let response = await fetch('http://localhost:5000/delete',{
+                let response = await fetch('https://render-backend-project-950s.onrender.com/delete',{
                     method: 'DELETE',
                     headers: {
                         token: localStorage.getItem("token"),
@@ -296,4 +296,5 @@ button:hover {
 </script>
 
 </html>
+
 
