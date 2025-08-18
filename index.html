@@ -106,7 +106,7 @@
 </body>
 <script>
     async function signup() {
-        const response = await fetch('http://localhost:5000/signup', {
+        const response = await fetch('https://render-backend-project-950s.onrender.com/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -121,7 +121,7 @@
     }
    
     async function signin(){
-        const response = await fetch('http://localhost:5000/signin', {
+        const response = await fetch('https://render-backend-project-950s.onrender.com/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -171,3 +171,4 @@
 </script>
 
 </html>
+
