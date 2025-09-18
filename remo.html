@@ -248,7 +248,7 @@
     }
 
     async function getinformation(){
-      let response = await fetch('http://localhost:5000/me',{
+      let response = await fetch('https://striking-purpose-production.up.railway.app/me',{
         method: 'GET',
         headers: {
           token: localStorage.getItem("token")
@@ -268,7 +268,7 @@
 
     async function deletei(element){
       let todo = element.closest('.todo-item').querySelector('.team').innerText;
-      let response = await fetch('http://localhost:5000/delete',{
+      let response = await fetch('https://striking-purpose-production.up.railway.app/delete',{
         method: 'DELETE',
         headers: {
           token: localStorage.getItem("token"),
@@ -288,3 +288,4 @@
   </script>
 </body>
 </html>
+
