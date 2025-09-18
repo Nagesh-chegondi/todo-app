@@ -184,7 +184,7 @@
       }
     }
     async function signup() {
-        const response = await fetch('http://localhost:5000/signup', {
+        const response = await fetch('https://striking-purpose-production.up.railway.app/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -199,7 +199,7 @@
     }
    
     async function signin(){
-        const response = await fetch('http://localhost:5000/signin', {
+        const response = await fetch('https://striking-purpose-production.up.railway.app/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -222,7 +222,7 @@
     }
     
     async function getinformation(){
-        let response = await fetch('http://localhost:5000/me',{
+        let response = await fetch('https://striking-purpose-production.up.railway.app/me',{
             method: 'GET',
             headers: {
                 token: localStorage.getItem("token")
@@ -248,3 +248,4 @@
   </script>
 </body>
 </html>
+
