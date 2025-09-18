@@ -226,6 +226,19 @@
   <script>
     async function addtodo(){
       let todo = document.getElementById('ADDTODO').value;
+       let addtodo =  await fetch('https://striking-purpose-production.up.railway.app/adtodo',{
+        method: 'POST',
+            headers:{
+                
+          'Content-Type': 'application/json',
+         token: localStorage.getItem("token")  
+              },
+
+            body: JSON.stringify({
+                todo:todo
+                
+            })
+       })
       let newdev = document.createElement('div');
       newdev.innerHTML += `<div class="tom"><div class="team">${todo}</div>
         <div><button onclick="complete(this)">Complete</button></div>
@@ -288,4 +301,5 @@
   </script>
 </body>
 </html>
+
 
