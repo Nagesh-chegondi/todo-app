@@ -1,302 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-       
-       
-       /* General Body and Container Styling */
-body {
-    background-color: #2c3e50;   /* A darker, more modern background
-    color: #ecf0f1; /* Light text for contrast */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A clean, modern font */
-    margin: 0;
-    padding: 0;
-}
-/* .tom{
-    display: flex;
-    width: 100%;
-    
-} */
- .tom {
-    display: flex;
-    width: 100%;
-    align-items: flex-start; /* or flex-end, or center */
-    gap: 10px;
-}
-.team{
-    width:80%;
-    background-color: rgb(89, 85, 85);
-    padding: 5px;
-    border: 2px black;
-    border-radius: 7px;
-    min-height: 30px;
-    
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <style>
+    /* ===== Global Reset ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.navi {
-    background-color: #34495e;
-    min-height: 60px;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    padding: 0 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-}
+    body {
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      min-height: 100vh;
+    }
 
-.container {
-    display: flex;
-    flex-wrap: wrap;  /*Allows sections to wrap on smaller screens*/
-    padding: 20px;
-    gap: 20px; /* Adds space between the columns */
-    min-height: calc(100vh - 60px); /* Fills the remaining viewport height */
-}
+    /* ===== Navbar ===== */
+    .navi {
+      background: #2c3e50;
+      height: 60px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 25px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-/* To-Do List and Input Area Styling */
-.tada {
-    /* flex: 1; Allows this section to grow and take up available space */
-    background: #34495e;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    /* align-items: center; */
-}
-.trim{
-    background-color: #465f7c;
-}
+    .navi button {
+      background: #e74c3c;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-.boxes {
-    /* flex-basis: 350px; A fixed width for the input box, but it can shrink */
-    background-color: #34495e;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    height: auto; /* Allow the height to adjust to content */
-    width: 21%;
-}
+    .navi button:hover {
+      background: #c0392b;
+      transform: scale(1.05);
+    }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+    /* ===== Main Container ===== */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      padding: 40px;
+      flex-wrap: wrap;
+    }
 
-label {
-    font-size: 1.1em;
-    font-weight: bold;
-}
+    /* ===== To-Do List Section ===== */
+    .tada {
+      flex: 1;
+      min-width: 500px;
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
 
-input[type="text"] {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #7f8c8d;
-    background-color: #ecf0f1;
-    color: #2c3e50;
-    font-size: 1em;
-}
+    /* ===== Add Todo Box ===== */
+    .boxes {
+      width: 300px;
+      /* background: white; */
+      border-radius: 12px;
+      /* padding: 25px; */
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
 
-/* Button Styling */
-button {
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 1em;
-    font-weight: bold;
-    text-transform: uppercase;
+    /* Hide by default */
+    .hidden {
+      display: none;
+    }
 
-    /* background-color: #2980b9; */
-}
-button>img{
-    /* opacity: 0; */
-    background-color: none;
-}
+    /* Add Button Styling */
+    .add-toggle {
+      background: #2ecc71;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+      width: 100%;
+    }
 
-button:hover {
-    background-color: #2980b9;
-}
+    .add-toggle:hover {
+      background: #27ae60;
+    }
 
-/* Logout Button Specifics */
-.logout-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #e74c3c;
-}
+    label {
+      font-size: 1em;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+      color: #2c3e50;
+    }
 
-.logout-btn:hover {
-    background-color: #c0392b;
-}
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.3s;
+    }
 
-/* To-Do Item Styling */
-.todo-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #465f7c;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: #ecf0f1;
-}
+    input[type="text"]:focus {
+      border-color: #74ebd5;
+      box-shadow: 0 0 6px rgba(116, 235, 213, 0.5);
+    }
 
-.todo-item > nav {
-    background: none;
-    display: block;
-    padding: 0;
-    margin: 0;
-    
-    flex-grow: 1;
-    font-size: 1.1em;
-}
+    /* ===== General Buttons ===== */
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
 
-/* Complete Button Styling within a To-Do Item */
-.todo-item button> {
-    background: #2ecc71;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
-    color: white;
-}
+    button:hover {
+      background: #2980b9;
+      transform: scale(1.05);
+    }
 
+    /* ===== Todo Item Styling ===== */
+    .todo-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f7f9fc;
+      border: 1px solid #e0e6ed;
+      padding: 12px 15px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+    }
 
+    .todo-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
 
-.completed-btn {
-    background-color: #e74c3c !important;
-    padding: 9px !important;
-    border-radius: 7px !important;
-}
-    </style>
+    .team {
+      flex-grow: 1;
+      font-size: 15px;
+      color: #2c3e50;
+      font-weight: 500;
+    }
+
+    /* Complete Button */
+    .todo-item button {
+      background: #2ecc71;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .todo-item button:hover {
+      background: #27ae60;
+    }
+
+    /* Delete Button */
+    .trim {
+      background: #e74c3c !important;
+      padding: 8px 12px !important;
+      margin-left: 8px;
+      border-radius: 6px !important;
+    }
+
+    .trim:hover {
+      background: #c0392b !important;
+    }
+    .but{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0px;
+    }
+  </style>
 </head>
 <body>
-    <div>
-        <div class="navi">
-            <nav><button onclick="logout()">logout</button></nav>
-         </div>
-        
+  <div class="navi">
+    <nav><button onclick="logout()">Logout</button></nav>
+  </div>
+
+  <div class="container">
+    <div class="tada"></div>
+
+    <div class="boxes">
+      <!-- Initially only Add button -->
+     <div class="but"><button class="add-toggle" onclick="toggleAddBox()">➕ Add</button></div>
+      
+
+      <!-- Hidden Add Box -->
+      <div id="addBox" class="hidden">
+        <form action="todo">
+          <label for="ADDTODO">Add Todo:</label>
+          <input type="text" id="ADDTODO" placeholder="Enter a todo">
+        </form>
+        <button onclick="addtodo()">Submit</button>
+      </div>
     </div>
+  </div>
 
-        </div>
-        <div class=" container">
-            <div class="tada">
-                
-        </div>
-            <div class="boxes">
-                <div><form action=" todo">
-                    <label for="ADDTODO">ADDTODO:</label>
-                    <input type="text" id="ADDTODO" placeholder="enter a TODO">
-                  
-                    
-                </form>
-              <button onclick="addtodo()">SUBMIT</button></div>
-            </div>
-
-        
-    
-</body>
-<script>
+  <script>
     async function addtodo(){
-        
-        // window.location.href = 'index.html';
-        let todo = document.getElementById('ADDTODO').value
-        let addtodo =  await fetch('https://striking-purpose-production.up.railway.app/adtodo',{
-            method: 'POST',
-            headers:{
-                
-    'Content-Type': 'application/json',
-     token: localStorage.getItem("token")  
-},
-
-            body: JSON.stringify({
-                todo:todo
-                
-            })
-        })
-         let newdev = document.createElement('div')  
-         newdev.innerHTML += `<div class = " tom"><div class = "team">${todo} </div>
-        <div> <button onclick="complete(this)">completed</button></div>
-         </div>
-         <div><button class ="trim" onclick="deletei(this)"><img src="./delete.svg" alt="delete"></button></div>`;
-         newdev.className = "todo-item";
-         document.getElementsByClassName('tada')[0].appendChild(newdev);
-
-
+      let todo = document.getElementById('ADDTODO').value;
+      let newdev = document.createElement('div');
+      newdev.innerHTML += `<div class="tom"><div class="team">${todo}</div>
+        <div><button onclick="complete(this)">Complete</button></div>
+        </div>
+        <div><button class="trim" onclick="deletei(this)"><img src="../delete.svg" alt="delete"></button></div>`;
+      newdev.className = "todo-item";
+      document.getElementsByClassName('tada')[0].appendChild(newdev);
     }
+
     function logout(){
-        localStorage.removeItem("token");
-        window.location.href = "index.html"
+      localStorage.removeItem("token");
+      window.location.href = "index.html";
     }
+
     function complete(element){
-        element.innerHTML = "COMPLETED";
-        element.style.backgroundColor = 'red';
-        element.style.padding = "9px";
-        element.style.borderRadius = "7px"
+      element.innerHTML = "Completed";
+      element.style.backgroundColor = 'red';
+      element.style.padding = "9px";
+      element.style.borderRadius = "7px";
     }
-     async function getinformation(){
-        let response = await fetch('https://striking-purpose-production.up.railway.app/me',{
-            method: 'GET',
-            headers: {
-                token: localStorage.getItem("token")
-            },
-            
 
-            
-            
-
-
-        });
-        const data = await( response.json());
-        // console.log(data.email);
-        // console.log(data.password);
-        console.log(data.todos);
-        for(let i=0;i<data.todos.length;i++){
-        let newdev = document.createElement('div')  
-         newdev.innerHTML += `<div class = " tom"><div class = "team">${data.todos[i].titles} </div>
-        <div> <button onclick="complete(this)">completed</button></div>
-         </div>
-         <div><button  class = "trim" onclick="deletei(this)"><img src="./delete.svg" alt="delete"></button></div>`;
-         newdev.className = "todo-item";
-         document.getElementsByClassName('tada')[0].appendChild(newdev);
+    async function getinformation(){
+      let response = await fetch('http://localhost:5000/me',{
+        method: 'GET',
+        headers: {
+          token: localStorage.getItem("token")
         }
-
-        // console.log(response.todo);
-    }; 
-    async function deletei(element){
-        let todo = element.closest('.todo-item').querySelector('.team').innerText;
-        // let todo =element.closest('.team').innerText;
-        
-        console.log(todo);
-                let response = await fetch('https://striking-purpose-production.up.railway.app/delete',{
-                    method: 'DELETE',
-                    headers: {
-                        token: localStorage.getItem("token"),
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        todo: todo
-                    })
-                });
-                element.closest('.todo-item').remove();
+      });
+      const data = await response.json();
+      for(let i=0;i<data.todos.length;i++){
+        let newdev = document.createElement('div');
+        newdev.innerHTML += `<div class="tom"><div class="team">${data.todos[i].titles}</div>
+          <div><button onclick="complete(this)">Complete</button></div>
+          </div>
+          <div><button class="trim" onclick="deletei(this)"><img src="../delete.svg" alt="delete"></button></div>`;
+        newdev.className = "todo-item";
+        document.getElementsByClassName('tada')[0].appendChild(newdev);
+      }
     }
-        getinformation();
 
-</script>
+    async function deletei(element){
+      let todo = element.closest('.todo-item').querySelector('.team').innerText;
+      let response = await fetch('http://localhost:5000/delete',{
+        method: 'DELETE',
+        headers: {
+          token: localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ todo: todo })
+      });
+      element.closest('.todo-item').remove();
+    }
 
+    function toggleAddBox() {
+      let box = document.getElementById("addBox");
+      box.classList.toggle("hidden");
+    }
+
+    getinformation();
+  </script>
+</body>
 </html>
-
-
-
-
